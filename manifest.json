@@ -1,0 +1,10 @@
+{
+  "name": "Richard's Spell Cards",
+  "description": "Редактируемые карточки заклинаний D&D",
+  "version": 2,
+  "code": "plugin.js",
+  "icon": "icon.svg",
+  "permissions": [
+    "content:write"
+  ]
+}
