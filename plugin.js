@@ -1,32 +1,44 @@
-// Penpot-native spell card prototype, no SVG text import.
-const UI = "https://valir-song.github.io/richard-spell-cards/index.html";
+// Richard's Spell Cards 0.2 — editable Penpot shapes and text.
+// Layout only: all elements are native Penpot objects.
+const UI="https://valir-song.github.io/richard-spell-cards/index.html";
 try {
-  const board=penpot.createBoard();
-  board.name="Ричард — Магическая рука";
-  board.x=120; board.y=120; board.resize(900,220);
-  board.fills=[{fillColor:"#F8F1E4"}];
-  const rectangle=(name,x,y,w,h,fill)=>{
-    const s=penpot.createRectangle();s.name=name;s.x=x;s.y=y;s.resize(w,h);
+  const X=120,Y=120,W=900,H=220;
+  const board=penpot.createBoard();board.name="Ричард — Магическая рука · пергамент 0.2";
+  board.x=X;board.y=Y;board.resize(W,H);board.fills=[{fillColor:"#F8F3E9"}];
+  const rect=(name,x,y,w,h,fill)=>{
+    const s=penpot.createRectangle();s.name=name;s.x=X+x;s.y=Y+y;s.resize(w,h);
     s.fills=[{fillColor:fill}];board.appendChild(s);return s;
   };
-  rectangle("Золотая рамка",126,126,888,208,"#C5A46B");
-  rectangle("Пергамент",130,130,880,200,"#F9F4E9");
-  rectangle("Светлая плашка",147,145,640,54,"#E7E4F1");
-  rectangle("Фиолетовая линия",147,145,4,145,"#8C79B9");
-  const circle=penpot.createEllipse();circle.name="Круг заклинания";circle.x=924;circle.y=265;circle.resize(62,62);circle.fills=[{fillColor:"#477FC0"}];board.appendChild(circle);
-  const addText=(name,value,x,y,size,color,font)=>{
-    const t=penpot.createText(value);
-    if(!t)throw Error("Не создан текст "+name);
-    t.name=name;t.x=x;t.y=y;t.fontSize=String(size);t.fontFamily=font||"Arial";
-    t.fills=[{fillColor:color}];t.growType="auto-height";board.appendChild(t);return t;
+  const ellipse=(name,x,y,w,h,fill)=>{
+    const s=penpot.createEllipse();s.name=name;s.x=X+x;s.y=Y+y;s.resize(w,h);
+    s.fills=[{fillColor:fill}];board.appendChild(s);return s;
   };
-  addText("Название","Магическая рука",165,150,25,"#30285D","Georgia");
-  addText("Параметры","Заговор · 30 фт. · 1 мин",165,184,14,"#735A42");
-  addText("Описание","Манипулирует предметами до 10 фунтов; не атакует.",165,227,16,"#302A27");
-  addText("Уровень","0",945,281,25,"#FFFFFF","Georgia");
+  const text=(name,value,x,y,size,color,font)=>{
+    const t=penpot.createText(value);if(!t)throw Error("Не создан текст "+name);
+    t.name=name;t.x=X+x;t.y=Y+y;t.fontSize=String(size);
+    t.fontFamily=font||"Arial";t.fills=[{fillColor:color}];t.growType="auto-height";
+    board.appendChild(t);return t;
+  };
+  // Framing: thin, understated double gold outline.
+  rect("Внешний кант · золото",5,5,890,210,"#B79B70");
+  rect("Поле · слоновая кость",7,7,886,206,"#FBF8F1");
+  rect("Внутренняя рамка",13,13,874,194,"#E4D4B8");
+  rect("Внутреннее поле",14,14,872,192,"#FBF8F1");
+  // Heading and discreet accents.
+  rect("Плашка названия",25,24,736,55,"#ECEAF2");
+  rect("Левый акцент",25,24,4,158,"#80709F");
+  rect("Линия под заголовком",43,90,795,1,"#D7C6A8");
+  rect("Угол · верх",18,18,32,2,"#B69A69");
+  rect("Угол · левый",18,18,2,29,"#B69A69");
+  rect("Угол · низ",848,200,30,2,"#B69A69");
+  rect("Угол · правый",876,173,2,29,"#B69A69");
+  // Spell circle and editable label.
+  ellipse("Обводка уровня",799,127,73,73,"#BEA77E");
+  ellipse("Круг уровня",802,130,67,67,"#5B6F9B");
+  text("Название · редактируемое","Магическая рука",45,30,27,"#322B4A","Georgia");
+  text("Свойства · редактируемые","ЗАГОВОР   ·   30 ФТ.   ·   1 МИН",45,66,13,"#796A69");
+  text("Описание · редактируемое","Манипулирует предметами до 10 фунтов; не атакует.",45,110,17,"#3B342F","Georgia");
+  text("Уровень · редактируемый","0",825,143,27,"#FFFFFF","Georgia");
   penpot.selection=[board];
   penpot.ui.open("Richard's Spell Cards",UI,{width:340,height:240});
-} catch(e) {
-  console.error("Richard's Spell Cards failed:",e);
-  penpot.ui.open("Richard's Spell Cards — ошибка",UI,{width:340,height:240});
-}
+} catch(e) {console.error("Richard's Spell Cards:",e);penpot.ui.open("Richard's Spell Cards — ошибка",UI,{width:340,height:240});}
