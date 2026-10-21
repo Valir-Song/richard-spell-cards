@@ -1,7 +1,7 @@
 {
   "name": "Richard's Spell Cards 0.3",
   "description": "Редактируемая декоративная карточка заклинания D&D",
-  "version": 3,
+  "version": 2,
   "code": "plugin-v3.js",
   "icon": "icon.svg",
   "permissions": [
