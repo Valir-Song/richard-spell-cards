@@ -2,9 +2,8 @@
   "name": "Richard's Spell Cards 0.3",
   "description": "Редактируемая декоративная карточка заклинания D&D",
   "version": 2,
-  "host": "https://valir-song.github.io/richard-spell-cards/",
-  "code": "https://valir-song.github.io/richard-spell-cards/plugin-v3.js",
-  "icon": "https://valir-song.github.io/richard-spell-cards/icon.svg",
+  "code": "plugin-v3.js",
+  "icon": "icon.svg",
   "permissions": [
     "content:write"
   ]
